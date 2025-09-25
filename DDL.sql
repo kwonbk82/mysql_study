@@ -130,5 +130,60 @@ ALTER TABLE 학생 DROP COLUMN 성별;
 ALTER TABLE 학생 RENAME STUDENT; 
         
 SELECT * FROM 과정;
-        
+
+-- 1. 제품 테이블의 재고 컬럼에 CHECK 제약조건을 추가하시오.
+--    제약조건 : 재고는 0보다 크거나 같아야 함
+
+ALTER TABLE 제품 ADD CHECK (재고>0);
+
+-- 2. 제품 테이블에 재고금액 컬럼을 추가하시오.
+--    이때 재고금액은 '단가*재고'가 자동 계산되어 저장되도록 설정할 것
+ALTER TABLE 제품 ADD COLUMN 재고금액 INT AS (단가*재고) STORED;
+
+-- 3. 제품 테이블에서 제품 레코드를 삭제하면 주문세부 테이블에 있는 관련 레코드도
+--    함께 삭제되도록 주문세부 테이블의 제품번호 컬럼에 외래키 제약조건과 옵션을 설정하시오
+ALTER TABLE 주문세부 ADD FOREIGN KEY (제품번호) REFERENCES 제품(제품번호) ON DELETE CASCADE;
+
+-- 1. 다음의 테이블 명세서를 참고하여 영화 테이블을 생성하시오.
+-- 	컬럼명		데이터타입		제약조건
+-- 	영화번호		고정문자형 5자		기본키
+-- 	타이틀		가변문자형 100자		필수입력
+-- 	장르		가변문자형 20자		코미디,드라마,다큐,SF,액션,역사,기타만 입력가능
+-- 	배우		가변문자형 100자		필수입력
+--	감독		가변문자형 50자		필수입력
+--	제작사		가변문자형 50자		필수입력
+-- 	개봉일		날짜형
+-- 	등록일		날짜형			오늘날짜 자동 입력
+
+CREATE TABLE 영화(
+	영화번호 CHAR(5) PRIMARY KEY,
+    타이틀 VARCHAR(100) NOT NULL,
+    장르 VARCHAR(20) CHECK(장르 IN ('코미디','드라마','다큐','SF','액션','역사','기타')),
+    배우 VARCHAR(100) NOT NULL,
+	감독 VARCHAR(50) NOT NULL,
+    제작사 VARCHAR(50) NOT NULL,
+    개봉일 DATE,
+    등록일 DATE DEFAULT(CURDATE())
+);
+
+
+
+-- 2. 평점관리 테이블을 생성하시오.
+-- 	컬럼명		데이터타입		제약조건
+-- 	번호		숫자형			일련번호 자동 입력, 기본키
+--	평가자닉네임	가변문자형 50자		필수입력
+--	영화번호		고정문자형 5자		필수입력, 영화테이블의 영화번호 참조
+-- 	평점		숫자형			1~5사이의 값만 입력. 필수입력
+-- 	평가		가변문자형 2000자		필수입력
+--	등록일		날짜형			오늘 날짜 자동 입력        
+
+CREATE TABLE 평점관리(
+	번호 INT AUTO_INCREMENT,
+    평가자닉네임 VARCHAR(50) NOT NULL,
+    영화번호 CHAR(5) NOT NULL REFERENCES 영화(영화번호),
+    평점 INT  NOT NULL CHECK(평점 BETWEEN 1 AND 5),
+    평가 VARCHAR(2000) NOT NULL,
+    등록일 DATE DEFAULT(CURDATE()),
+    PRIMARY KEY(번호)
+);
 
