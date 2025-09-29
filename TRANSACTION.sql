@@ -1,0 +1,35 @@
+CREATE TABLE 부서_TCL
+	AS SELECT * FROM 부서;
+    
+SELECT * FROM 부서_TCL;
+DESC 부서_TCL;
+
+INSERT INTO 부서_TCL
+VALUE ('A3','개발부');
+
+UPDATE 부서_TCL
+SET 부서명='라부부'
+WHERE 부서번호='A2';    
+
+DELETE FROM 부서_TCL
+WHERE 부서번호='A3';
+
+ROLLBACK;
+
+INSERT INTO 부서_TCL
+VALUE ('A6','기획부');
+COMMIT;
+
+UPDATE 부서_TCL
+SET 부서명='라부부'
+WHERE 부서번호='A2';   
+
+SAVEPOINT INS; 
+
+DELETE FROM 부서_TCL
+WHERE 부서번호='A5';
+
+SAVEPOINT DEL;
+
+ROLLBACK TO SAVEPOINT INS;
+COMMIT;

@@ -40,22 +40,22 @@ CREATE TABLE 원생(
     INDEX 등록일인덱스(등록일),
     INDEX 이름인덱스(이름)
 );
-SHOW INDEX FROM ;
+-- SHOW INDEX FROM ;
 
 DELIMITER $$
 CREATE PROCEDURE proc_if()
 	BEGIN 
-    DECLARE x INT;
-    SET x=10;
-	DECLARE y INT DEFAULT 5;
-    IF x>y 
-    THEN SELECT 'x는y보다 큽니다.' AS 결과;
-    ELSE 
-    SELECT 'x는y보다 작읍니다.' AS 결과;
-    END IF;
+		DECLARE x INT;
+		DECLARE y INT DEFAULT 5;
+        SET x=10;
+		IF x>y THEN 
+			SELECT 'x는y보다 큽니다.' AS 결과;
+		ELSE 
+			SELECT 'x는y보다 작읍니다.' AS 결과;
+		END IF;
     END $$
-    DELIMITER ;
-    
+DELIMITER ;
+CALL proc_if();
     DELIMITER $$
 CREATE PROCEDURE proc_고객정보()
 	BEGIN 
