@@ -11,6 +11,7 @@ public class TvMain1 {
 		samsung.channel = 55;
 		samsung.volume = 10;
 		samsung.power = false;
+		samsung.setChannel(70);
 		
 		apple.color = "gray";
 		apple.channel = 1557;

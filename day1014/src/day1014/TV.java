@@ -31,4 +31,7 @@ public class TV {
 		System.out.println("음소거");
 
 	}
+	void setChannel(int ch) {
+		channel = ch;
+	}
 }
