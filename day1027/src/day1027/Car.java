@@ -11,7 +11,7 @@ public class Car {
 	}
 	public void setCar(int num,double gas) {
 		if(gas<0) {
-			throw new CarException(gas);
+//			throw new CarException(gas);
 		}else {
 			this.num=num;
 			this.gas=gas;

@@ -2,7 +2,7 @@ package day1027;
 
 public class ThrowsExam1 {
 	public static void main(String[] args) {
-		method1();
+//		method1();
 	}
 	static void method1() throws Exception{
 		try{

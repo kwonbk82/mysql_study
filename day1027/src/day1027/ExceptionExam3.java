@@ -12,7 +12,7 @@ public class ExceptionExam3 {
 				System.out.println(arr[i]);
 			}
 			i = 4/2;
-			str.charAt(i);
+			
 		}catch(ArrayIndexOutOfBoundsException | ArithmeticException e) {
 			System.out.println("Error 109");
 		}catch(Exception e){
