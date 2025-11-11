@@ -17,7 +17,7 @@ public class AdminMenu extends AbstractMenu {
 		super(ADMIN_MENU_TEXT, prevMenu);
 		// TODO Auto-generated constructor stub
 	}
-	
+	 
 	public static AdminMenu getInstance() {
 		return instance;
 	}
